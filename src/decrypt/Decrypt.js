@@ -8,9 +8,9 @@ class Decrypt extends Component {
 
     if (x.charCodeAt(0) + this.props.secretKey > 122) {
       return (x.charCodeAt(0) + this.props.secretKey) % 122 + 96
-    } else {
-      return (x.charCodeAt(0) + this.props.secretKey); 
     }
+    
+    return (x.charCodeAt(0) + this.props.secretKey); 
   }
 
   getCiphertext = () => {
