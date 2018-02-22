@@ -1,47 +1,38 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import {Tabs, Tab} from 'material-ui/Tabs';
+
 import Encrypt from './encrypt/Encrypt'
 import Decrypt from './decrypt/Decrypt';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      encrypt: true
-    };
-  }
-
-  setEncrypt = () => {
-    this.setState({encrypt: true})
-  }
-
-  setDecrypt = () => {
-    this.setState({encrypt: false})
-  }
-
-  getView() {
-    return this.state.encrypt ? 
-    <Encrypt /> : 
-    <Decrypt plaintext={this.state.plaintext}
-             secretKey={this.state.key}/>
-  }
-
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Caesar Cipher</h1>
-        </header>
-        <div>
-          <div onClick={this.setEncrypt}>Encrypt</div>
-          <div onClick={this.setDecrypt}>Decrypt</div>
+      <MuiThemeProvider>
+        <div className="App">
+          <header className="App-header">
+            <img src="scissor.png" className="App-logo" alt="logo" />
+            <img src="sai.png" className="App-logo" alt="logo" />
+            <img src="fur.png" className="App-logo" alt="logo" />
+            <h1 className="App-title">dbftbs djqifs</h1>
+          </header>
+
+          <Tabs>
+            <Tab label="Encrypt" >
+              <Encrypt />
+            </Tab>
+            <Tab label="Decrypt" >
+              <Decrypt />
+            </Tab>
+          </Tabs>
+
         </div>
-        <div>
-          {this.getView()}
-        </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }

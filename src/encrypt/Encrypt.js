@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { isAllowableChar } from '../helpers'
+import TextField from 'material-ui/TextField';
+import Slider from 'material-ui/Slider';
+import Paper from 'material-ui/Paper';
 
 class Encrypt extends Component {
   constructor(props) {
@@ -38,31 +41,62 @@ class Encrypt extends Component {
     this.setState({plaintext: text})
   }
 
-  secretKeyChange = (e) => {
-    var key = parseInt(e.target.value, 10)
-    if (key && (key > 26 || key <= 0)) {
-      return
-    }
-    if (!key) {
-      this.setState({secretKey: 0})
-    } else {
-      this.setState({secretKey: key})
+  secretKeyChange = (e, val) => {
+    this.setState({secretKey: val})
+  }
+
+  getOutput = (style) => {
+    var cipherText = this.getCiphertext()
+    if (cipherText) {
+      return (
+        <Paper style={style}>
+          <p>{cipherText}</p>
+        </Paper>
+      )
     }
   }
 
   render() {
+    var divStyle = {
+      textAlign: 'center',
+      paddingTop: '25px'
+    }
+
+    var sliderDivStyle = {
+      marginTop: '50px',
+    }
+
+    var sliderStyle = {
+      width: '50%',
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+
+    var paperStyle = {
+      padding: '25px',
+      width: '50%',
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+
     return (
-      <div>
-        This is the page to encrypt.<br/>
-        <input value={this.state.plaintext} 
-               onChange={this.plaintextChange}>
-        </input>
-        <input type="number" 
-               pattern="[0-9]*"
-               value={this.state.secretKey}
-               onChange={this.secretKeyChange}>
-        </input>
-        <p>{this.getCiphertext()}</p>
+      <div style={divStyle}>
+        <TextField floatingLabelText="String to encrypt" 
+          value={this.state.plaintext} 
+          onChange={this.plaintextChange} />
+
+        <div style={sliderDivStyle}>
+          Key: {this.state.secretKey}
+          <Slider defaultValue={1} 
+            style={sliderStyle}
+            step={1} 
+            min={1} 
+            max={26}
+            value={this.state.secretKey}
+            onChange={this.secretKeyChange} />
+        </div>
+
+        {this.getOutput(paperStyle)}
       </div>
     );
   }
