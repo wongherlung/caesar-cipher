@@ -8,7 +8,7 @@ class Decrypt extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ciphertext: '',
+      ciphertext: 'zk zj kyv veu fw kyv givjvekrkzfe',
       secretKey: 1
     };
   }
